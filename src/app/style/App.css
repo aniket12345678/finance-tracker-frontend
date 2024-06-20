@@ -1,0 +1,13 @@
+.main-header {
+  padding: 50px 414px;
+}
+
+.finance-record-main {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(-135deg, #c850c0, #4158d0);
+}
+
+.finance-table {
+  padding: 2.5%;
+}
