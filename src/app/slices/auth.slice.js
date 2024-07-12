@@ -1,11 +1,40 @@
-import { auth } from "../services/auth.service";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { frontEndUrl } from "../config/Api";
 
-function auth_signup(data) {
-    return auth.signup(data);
-}
+export const auth_signup = createAsyncThunk('',
+    async (data) => {
+        try {
+            const response = await frontEndUrl.post('/user/signup', data);
+            return response.data;
+        } catch (error) {
 
-function auth_signin(data) {
-    return auth.signin(data);
-}
+        }
+    }
+)
 
-export { auth_signup, auth_signin };
+export const auth_signin = createAsyncThunk('',
+    async (data) => {
+        try {
+            const response = await frontEndUrl.post('/user/signin', data);
+            return response.data;
+        } catch (error) {
+
+        }
+    }
+)
+
+const initialState = {};
+
+export const authSlice = createSlice({
+    name: 'authSlice',
+    initialState: initialState,
+    reducers: {},
+    extraReducers: (builder) => {
+        builder.addCase(auth_signin.fulfilled, (state, action) => {
+            console.log('auth_signin:- ', action);
+        });
+        builder.addCase(auth_signup.fulfilled, (state, action) => {
+            console.log('auth_signup:- ', action);
+        })
+    }
+});
